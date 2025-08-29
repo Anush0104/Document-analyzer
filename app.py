@@ -9,6 +9,14 @@ import logging
 from rake_nltk import Rake
 import cv2
 import re
+import os
+
+UPLOAD_FOLDER = 'uploads'
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024  # 10MB max
 
 # Setup logging
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -212,4 +220,5 @@ def summarize():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=os.environ.get("PORT", 5000))
+
 
